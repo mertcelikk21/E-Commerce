@@ -1,4 +1,4 @@
-using eTicaret.Data.DataContext;
+using eTicaret.Infrastructure.DataContext;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

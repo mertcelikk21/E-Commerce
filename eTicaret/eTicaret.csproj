@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\eTicaret.Data\eTicaret.Data.csproj" />
+    <ProjectReference Include="..\eTicaret.Infrastructure\eTicaret.Infrastructure.csproj" />
   </ItemGroup>
 
 

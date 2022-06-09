@@ -1,11 +1,9 @@
-﻿using eTicaret.Data.DataContext;
-using eTicaret.Data.DbModels;
-using Microsoft.AspNetCore.Http;
+﻿
+using eTicaret.Core.DbModels;
+using eTicaret.Infrastructure.DataContext;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace eTicaret.Controllers

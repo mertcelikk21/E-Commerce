@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace eTicaret.Data.DbModels
+namespace eTicaret.Core.DbModels
 {
     public class Product
     {
