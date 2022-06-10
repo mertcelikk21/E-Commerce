@@ -27,6 +27,13 @@ namespace eTicaret.Controllers
             return Ok();
         }
 
+        [HttpGet("badrequest")]
+        public ActionResult GetBadRequest()
+        {
+            return BadRequest(new ApiResponse(400));
+        }
+
+
         [HttpGet("servererror")]
         public ActionResult GetServerError()
         {
@@ -36,11 +43,7 @@ namespace eTicaret.Controllers
             return Ok();
         }
 
-        [HttpGet("badrequest")]
-        public ActionResult GetBadRequest()
-        {
-            return BadRequest(new ApiResponse(400));
-        }
+        
 
         [HttpGet("badrequest/{id}")]
         public ActionResult GetNotFoundRequest(int id)
