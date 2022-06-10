@@ -1,4 +1,6 @@
+using AutoMapper;
 using eTicaret.Core.Interfaces;
+using eTicaret.Helpers;
 using eTicaret.Infrastructure.DataContext;
 using eTicaret.Infrastructure.Implements;
 using Microsoft.AspNetCore.Builder;
@@ -24,6 +26,7 @@ namespace eTicaret
         {
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddAutoMapper(typeof(MappingProfiles));
             services.AddControllers();
             services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
