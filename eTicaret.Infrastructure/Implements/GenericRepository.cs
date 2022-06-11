@@ -19,6 +19,12 @@ namespace eTicaret.Infrastructure.Implements
         {
             _context = context;
         }
+
+        public async Task<int> CountAsnyc(ISpecification<T> spec)
+        {
+            return await ApplySpecification(spec).CountAsync();
+        }
+
         public async Task<T> GetByIdAsync(int id)
         {
             return await _context.Set<T>().FindAsync(id);

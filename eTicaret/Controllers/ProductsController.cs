@@ -4,6 +4,7 @@ using eTicaret.Core.DbModels;
 using eTicaret.Core.Interfaces;
 using eTicaret.Core.Specification;
 using eTicaret.Dtos;
+using eTicaret.Helpers;
 using eTicaret.Infrastructure.DataContext;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace eTicaret.Controllers
 {
-   
+
     public class ProductsController : BaseApiController
     {
         //private readonly StoreContext _context;
@@ -35,24 +36,16 @@ namespace eTicaret.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts()
+        public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams productSpecParams)
         {
-            var spec = new ProductsWithProductTypeAndBrandSpecification();
-            var data = await _productRepository.ListAsync(spec);
-            // return Ok(data);
+            var spec = new ProductsWithProductTypeAndBrandSpecification(productSpecParams);
+            var countSpec = new ProductWithFiltersForCountSpecification(productSpecParams);
+            var totalItems = await _productRepository.CountAsnyc(spec);
+            var product = await _productRepository.ListAsync(spec);
 
-            //return data.Select(p => new ProductToReturnDto
-            //{
-            //    Id = p.Id,
-            //    Name = p.Name,
-            //    Description = p.Description,
-            //    PictureUrl = p.PictureUrl,
-            //    Price = p.Price,
-            //    ProductBrand = p.ProductBrand.Name != null ? p.ProductBrand.Name : string.Empty,
-            //    ProductType = p.ProductType.Name != null ? p.ProductType.Name : string.Empty
-            //}).ToList();
+            var data = _mapper.Map<IReadOnlyList<Product>,IReadOnlyList< ProductToReturnDto >> (product);
 
-            return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(data));
+            return Ok(new Pagination<ProductToReturnDto>(productSpecParams.PageIndex,productSpecParams.PageSize,totalItems,data));
         }
 
         [HttpGet("{id}")]
@@ -60,8 +53,8 @@ namespace eTicaret.Controllers
         {
             var spec = new ProductsWithProductTypeAndBrandSpecification(id);
 
-           // return await _productRepository.GetEntityWithSpec(spec);
-           var product = await _productRepository.GetEntityWithSpec(spec);
+            // return await _productRepository.GetEntityWithSpec(spec);
+            var product = await _productRepository.GetEntityWithSpec(spec);
             return _mapper.Map<Product, ProductToReturnDto>(product);
 
         }

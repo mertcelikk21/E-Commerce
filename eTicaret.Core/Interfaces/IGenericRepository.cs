@@ -13,6 +13,7 @@ namespace eTicaret.Core.Interfaces
         Task<IReadOnlyList<T>> ListAllAsync();
         Task<T> GetEntityWithSpec(ISpecification<T> spec);
         Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec);
+        Task<int> CountAsnyc(ISpecification<T> spec);
 
     }
 }
