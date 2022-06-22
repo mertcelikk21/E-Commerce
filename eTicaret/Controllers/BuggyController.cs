@@ -37,7 +37,7 @@ namespace eTicaret.Controllers
         [HttpGet("servererror")]
         public ActionResult GetServerError()
         {
-            var product = _context.Products.Find(5);
+            var product = _context.Products.Find(21);
 
             var productToString = product.ToString();
             return Ok();
