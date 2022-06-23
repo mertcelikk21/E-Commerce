@@ -34,6 +34,7 @@ namespace eTicaret
                 return ConnectionMultiplexer.Connect(configuration);
             });
             services.AddApplicationServices();
+            services.AddIdentityServices(Configuration);
             services.AddSwaggerDocumentation();
             services.AddCors(opt =>
             {
@@ -52,6 +53,7 @@ namespace eTicaret
             //    app.UseDeveloperExceptionPage();
             //}
 
+
             app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseStatusCodePagesWithReExecute("/error/{0}");
@@ -63,6 +65,8 @@ namespace eTicaret
             app.UseRouting();
 
             app.UseCors("CorsPolicy");
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
