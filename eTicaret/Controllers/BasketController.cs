@@ -1,5 +1,7 @@
-﻿using eTicaret.Core.DbModels;
+﻿using AutoMapper;
+using eTicaret.Core.DbModels;
 using eTicaret.Core.Interfaces;
+using eTicaret.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -9,9 +11,11 @@ namespace eTicaret.Controllers
     public class BasketController : BaseApiController
     {
         private readonly IBasketRepository _basketRepository;
-        public BasketController(IBasketRepository basketRepository)
+        private readonly IMapper _mapper;
+        public BasketController(IBasketRepository basketRepository, IMapper mapper)
         {
             _basketRepository = basketRepository;
+            _mapper = mapper;
         }
         [HttpGet]
         public async Task<ActionResult<CustomerBasket>> GetBasketById(string id)
@@ -20,14 +24,15 @@ namespace eTicaret.Controllers
             return Ok(basket ?? new CustomerBasket(id));
         }
         [HttpPost]
-        public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasket basket)
+        public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasketDto basket)
         {
             if (basket.Id == null)
             {
                 var newGuidValue = Guid.NewGuid();
                 basket.Id = newGuidValue.ToString();
             }
-            var updatedBasket = await _basketRepository.UpdateBasketAsync(basket);
+            var customerBasket = _mapper.Map<CustomerBasketDto, CustomerBasket>(basket);
+            var updatedBasket = await _basketRepository.UpdateBasketAsync(customerBasket);
             return Ok(updatedBasket);
         }
 

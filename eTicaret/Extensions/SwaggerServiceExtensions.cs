@@ -15,6 +15,26 @@ namespace eTicaret.Extensions
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "E-Commerce API", Version = "v1" });
+
+                var securityShema = new OpenApiSecurityScheme
+                {
+                    Description = "JWT Auth Bearer Schema",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
+                };
+                c.AddSecurityDefinition("Bearer", securityShema);
+                var securityRequirement = new OpenApiSecurityRequirement
+                {
+                    {securityShema,new[]{"Bearer"} }
+                };
+                c.AddSecurityRequirement(securityRequirement);
             });
             return services;
         }
