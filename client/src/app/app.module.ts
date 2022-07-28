@@ -28,7 +28,7 @@ import { BasketModule } from './basket/basket.module';
     ShopModule,
     HomeModule,
     BasketModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterCeptor,multi:true},

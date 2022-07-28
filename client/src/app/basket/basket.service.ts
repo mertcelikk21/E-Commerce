@@ -32,6 +32,7 @@ export class BasketService {
         this.basketSource.next(response);
         this.calculateTotals();
         if(localStorage.getItem('basket_id') === "undefined"){
+          console.log('log hata mesajı');
           localStorage.setItem('basket_id', response.id);
         }
         console.log(response);
