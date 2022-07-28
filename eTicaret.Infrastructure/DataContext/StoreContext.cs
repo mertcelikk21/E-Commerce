@@ -1,7 +1,9 @@
 ﻿using eTicaret.Core.DbModels;
 using eTicaret.Core.DbModels.Identity;
+using eTicaret.Core.DbModels.OrderAggregate;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Address = eTicaret.Core.DbModels.Identity.Address;
 
 namespace eTicaret.Infrastructure.DataContext
 {
@@ -17,6 +19,10 @@ namespace eTicaret.Infrastructure.DataContext
         public DbSet<ProductBrand> ProductBrands { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
