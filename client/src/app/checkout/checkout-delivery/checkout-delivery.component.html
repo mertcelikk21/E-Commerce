@@ -1,0 +1,27 @@
+<div class="mt-4 mb-4" [formGroup]="checkoutForm">
+    <div class="row" formGroupName="deliveryForm">
+        <div class="col-6 form-check" *ngFor="let method of deliveryMethods">
+            <input (click)="setShippingPrice(method)" 
+            type="checkbox"
+             id="{{method.Id}}"
+             value="{{method.Id}}"
+             formControlName="deliveryMethods"
+            class="form-check-input">
+
+            <label for="{{method.Id}}" class="form-check-label"></label>
+            <strong>{{method.shortName}} - {{method.price|currency}}</strong>
+            <br>
+            <span class="label-description">{{method.description}}</span>
+
+        </div>
+    </div>
+</div>
+
+<div class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5">
+    <button class="btn btn-outline-primary" cdkStepperPrevious>
+        <i class="fa fa-angle-left"></i> Back To Address
+    </button>
+    <button class="btn btn-primary" cdkStepperNext>
+        <i class="fa fa-angle-right"></i> Go To Review
+    </button>
+</div>
