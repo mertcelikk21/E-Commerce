@@ -3,5 +3,5 @@ export class IDeliveryMethod{
   deliveryTime:string;
   description:string;
   price:number;
-  Id:number;
+  id?:number;
 }

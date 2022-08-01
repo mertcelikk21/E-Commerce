@@ -21,7 +21,7 @@ export class CheckoutService {
   getDeliveryMethods(){
     return this.http.get(this.baseUrl+'orders/deliveryMethods').pipe(
       map((de:IDeliveryMethod[])=>{
-        return de.sort((a,b)=>b.price*a.price);
+        return de.sort((a,b)=>b.price - a.price);
       })
     );
   }

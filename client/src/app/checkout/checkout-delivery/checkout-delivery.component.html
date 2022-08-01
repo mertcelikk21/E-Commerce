@@ -3,12 +3,12 @@
         <div class="col-6 form-check" *ngFor="let method of deliveryMethods">
             <input (click)="setShippingPrice(method)" 
             type="checkbox"
-             id="{{method.Id}}"
-             value="{{method.Id}}"
-             formControlName="deliveryMethods"
+             id="{{method.id}}"
+             value="{{method.id}}"
+             formControlName="deliveryMethod"
             class="form-check-input">
 
-            <label for="{{method.Id}}" class="form-check-label"></label>
+            <label for="{{method.id}}" class="form-check-label"></label>
             <strong>{{method.shortName}} - {{method.price|currency}}</strong>
             <br>
             <span class="label-description">{{method.description}}</span>

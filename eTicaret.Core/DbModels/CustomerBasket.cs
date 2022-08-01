@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace eTicaret.Core.DbModels
 {
@@ -17,5 +15,11 @@ namespace eTicaret.Core.DbModels
         }
         public string Id { get; set; }
         public List<BasketItem> Items { get; set; } = new List<BasketItem>();
+
+        public int? DeliveryMethodId { get; set; }
+        public string ClientSecret { get; set; }
+        public string PaymentIntentId { get; set; }
+        public decimal ShippingPrice { get; set; }
+
     }
 }
